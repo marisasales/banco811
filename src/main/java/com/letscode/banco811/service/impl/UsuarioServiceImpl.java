@@ -1,6 +1,5 @@
 package com.letscode.banco811.service.impl;
 
-import com.letscode.banco811.dto.ContaResponse;
 import com.letscode.banco811.dto.UsuarioRequest;
 import com.letscode.banco811.dto.UsuarioResponse;
 import com.letscode.banco811.model.Usuario;
@@ -32,7 +31,10 @@ public class UsuarioServiceImpl implements UsuarioService {
     PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, "nome");
 
     if (nome != null) {
-      return usuarioRepository.findByNome(nome, pageRequest);
+      return new PageImpl<>(
+          UsuarioResponse.toResponse(usuarioRepository.findByNome(nome, pageRequest).getContent()),
+          pageRequest,
+          usuarioRepository.count());
     }
 
     return new PageImpl<>(
