@@ -26,6 +26,11 @@ public class ContaController {
         return contaService.getAll(page, size);
     }
 
+    @GetMapping("/{id}")
+    public ContaResponse getById(@PathVariable Integer id) {
+        return contaService.getById(id);
+    }
+
     @PutMapping("/{id}")
     public ContaResponse update(@PathVariable Integer id, @RequestBody ContaRequest contaRequest) {
         return contaService.update(contaRequest, id);
