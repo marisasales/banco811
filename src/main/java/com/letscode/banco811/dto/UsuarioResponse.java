@@ -1,7 +1,6 @@
 package com.letscode.banco811.dto;
 
 import com.letscode.banco811.model.Usuario;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -2,13 +2,10 @@ package com.letscode.banco811.controller;
 
 import com.letscode.banco811.dto.UsuarioRequest;
 import com.letscode.banco811.dto.UsuarioResponse;
-import com.letscode.banco811.model.Usuario;
 import com.letscode.banco811.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/usuario")

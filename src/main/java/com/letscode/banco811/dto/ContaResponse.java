@@ -2,10 +2,8 @@ package com.letscode.banco811.dto;
 
 import com.letscode.banco811.model.Conta;
 import com.letscode.banco811.model.TipoConta;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

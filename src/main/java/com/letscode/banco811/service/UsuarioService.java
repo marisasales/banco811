@@ -5,8 +5,6 @@ import com.letscode.banco811.dto.UsuarioResponse;
 import com.letscode.banco811.model.Usuario;
 import org.springframework.data.domain.Page;
 
-import java.util.List;
-
 public interface UsuarioService {
 
     Page<UsuarioResponse> getAll(String name, int page, int size);
