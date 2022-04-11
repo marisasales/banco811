@@ -61,8 +61,5 @@ public class UsuarioServiceImpl implements UsuarioService {
   }
 
   @Override
-  public void delete(Integer id) {
-    var usuario = usuarioRepository.findById(id).orElseThrow();
-    usuarioRepository.delete(usuario);
-  }
+  public void delete(Integer id) { usuarioRepository.deleteById(id); }
 }
