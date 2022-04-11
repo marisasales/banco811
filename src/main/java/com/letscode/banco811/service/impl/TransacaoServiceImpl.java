@@ -17,39 +17,39 @@ import java.util.List;
 @Service
 public class TransacaoServiceImpl implements TransacaoService {
 
-  @Autowired
-  TransacaoRepository transacaoRepository;
+    @Autowired
+    TransacaoRepository transacaoRepository;
 
-  @Autowired
-  ContaService contaService;
+    @Autowired
+    ContaService contaService;
 
-  @Override
-  public TransacaoResponse create(Integer id, TransacaoRequest transacaoRequest) {
-    Conta contaOrigem = contaService.getById(id);
-    Conta contaDestino = contaService.getByNumeroAndAgencia(
-        transacaoRequest.getNumero(), transacaoRequest.getAgencia());
+    @Override
+    public TransacaoResponse create(Integer id, TransacaoRequest transacaoRequest) {
+        Conta contaOrigem = contaService.getById(id);
+        Conta contaDestino = contaService.getByNumeroAndAgencia(
+            transacaoRequest.getNumero(), transacaoRequest.getAgencia());
 
-    Transacao transacao = new Transacao(transacaoRequest);
-    transacao.setConta(contaOrigem);
+        Transacao transacao = new Transacao(transacaoRequest);
+        transacao.setConta(contaOrigem);
 
-    contaService.updateSaldo(contaOrigem, transacaoRequest.getValor(), true);
-    contaService.updateSaldo(contaDestino, transacaoRequest.getValor(), false);
+        contaService.updateSaldo(contaOrigem, transacaoRequest.getValor(), true);
+        contaService.updateSaldo(contaDestino, transacaoRequest.getValor(), false);
 
-    return new TransacaoResponse(transacaoRepository.save(transacao));
-  }
+        return new TransacaoResponse(transacaoRepository.save(transacao));
+    }
 
-  @Override
-  public List<TransacaoResponse> getAll() {
-    return TransacaoResponse.toResponse(transacaoRepository.findAll());
-  }
+    @Override
+    public List<TransacaoResponse> getAll() {
+        return TransacaoResponse.toResponse(transacaoRepository.findAll());
+    }
 
-  @Override
-  public List<TransacaoView> getAllViewByTipoTransacao(TipoTransacao tipoTransacao) {
-    return transacaoRepository.findAllByTipoTransacao(tipoTransacao);
-  }
+    @Override
+    public List<TransacaoView> getAllViewByTipoTransacao(TipoTransacao tipoTransacao) {
+        return transacaoRepository.findAllByTipoTransacao(tipoTransacao);
+    }
 
-  @Override
-  public void delete(Integer id) {
-    transacaoRepository.deleteById(id);
-  }
+    @Override
+    public void delete(Integer id) {
+        transacaoRepository.deleteById(id);
+    }
 }

@@ -11,31 +11,32 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/usuario")
 public class UsuarioController {
 
-  @Autowired UsuarioService usuarioService;
+    @Autowired
+    UsuarioService usuarioService;
 
-  @PostMapping
-  public UsuarioResponse create(@RequestBody UsuarioRequest usuarioRequest) {
-    return usuarioService.create(usuarioRequest);
-  }
+    @PostMapping
+    public UsuarioResponse create(@RequestBody UsuarioRequest usuarioRequest) {
+        return usuarioService.create(usuarioRequest);
+    }
 
-  @GetMapping
-  public Page<UsuarioResponse> getAll(
-      @RequestParam(required = false) String nome,
-      @RequestParam(required = false, defaultValue = "0") int page,
-      @RequestParam(required = false, defaultValue = "3") int size) {
-    return usuarioService.getAll(nome, page, size);
-  }
+    @GetMapping
+    public Page<UsuarioResponse> getAll(
+        @RequestParam(required = false) String nome,
+        @RequestParam(required = false, defaultValue = "0") int page,
+        @RequestParam(required = false, defaultValue = "3") int size) {
+        return usuarioService.getAll(nome, page, size);
+    }
 
-  @GetMapping("/{id}")
-  public UsuarioResponse getById(@PathVariable Integer id) {
-    return new UsuarioResponse(usuarioService.getById(id));
-  }
+    @GetMapping("/{id}")
+    public UsuarioResponse getById(@PathVariable Integer id) {
+        return new UsuarioResponse(usuarioService.getById(id));
+    }
 
-  @PutMapping("/{id}")
-  public UsuarioResponse update(@PathVariable Integer id, @RequestBody UsuarioRequest usuarioRequest) {
-    return usuarioService.update(usuarioRequest, id);
-  }
+    @PutMapping("/{id}")
+    public UsuarioResponse update(@PathVariable Integer id, @RequestBody UsuarioRequest usuarioRequest) {
+        return usuarioService.update(usuarioRequest, id);
+    }
 
-  @DeleteMapping("/{id}")
-  public void delete(@PathVariable Integer id) { usuarioService.delete(id); }
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Integer id) { usuarioService.delete(id); }
 }

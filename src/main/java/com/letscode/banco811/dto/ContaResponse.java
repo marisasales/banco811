@@ -13,23 +13,23 @@ import java.util.stream.Collectors;
 @Getter @Setter
 public class ContaResponse {
 
-  private Integer numero;
-  private Integer agencia;
-  private BigDecimal saldo;
-  private TipoConta tipoConta;
-  private LocalDateTime dataCriacao;
-  private LocalDateTime dataAtualizacao;
+    private Integer numero;
+    private Integer agencia;
+    private BigDecimal saldo;
+    private TipoConta tipoConta;
+    private LocalDateTime dataCriacao;
+    private LocalDateTime dataAtualizacao;
 
-  public ContaResponse(Conta conta) {
-    this.numero = conta.getNumero();
-    this.agencia = conta.getAgencia();
-    this.saldo = conta.getSaldo();
-    this.tipoConta = conta.getTipoConta();
-    this.dataCriacao = conta.getDataCriacao();
-    this.dataAtualizacao = conta.getDataAtualizacao();
-  }
+    public ContaResponse(Conta conta) {
+        this.numero = conta.getNumero();
+        this.agencia = conta.getAgencia();
+        this.saldo = conta.getSaldo();
+        this.tipoConta = conta.getTipoConta();
+        this.dataCriacao = conta.getDataCriacao();
+        this.dataAtualizacao = conta.getDataAtualizacao();
+    }
 
-  public static List<ContaResponse> toResponse(List<Conta> contas) {
-    return contas.stream().map(ContaResponse::new).collect(Collectors.toList());
-  }
+    public static List<ContaResponse> toResponse(List<Conta> contas) {
+        return contas.stream().map(ContaResponse::new).collect(Collectors.toList());
+    }
 }

@@ -15,51 +15,51 @@ import org.springframework.stereotype.Service;
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
-  @Autowired UsuarioRepository usuarioRepository;
+    @Autowired UsuarioRepository usuarioRepository;
 
-  @Override
-  public UsuarioResponse create(UsuarioRequest usuarioRequest) {
+    @Override
+    public UsuarioResponse create(UsuarioRequest usuarioRequest) {
 
-    Usuario usuario = new Usuario(usuarioRequest);
-    usuarioRepository.save(usuario);
-    return new UsuarioResponse(usuario);
-  }
-
-  @Override
-  public Page<UsuarioResponse> getAll(String nome, int page, int size) {
-
-    PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, "nome");
-
-    if (nome != null) {
-      return new PageImpl<>(
-          UsuarioResponse.toResponse(usuarioRepository.findByNome(nome, pageRequest).getContent()),
-          pageRequest,
-          usuarioRepository.count());
+        Usuario usuario = new Usuario(usuarioRequest);
+        usuarioRepository.save(usuario);
+        return new UsuarioResponse(usuario);
     }
 
-    return new PageImpl<>(
-        UsuarioResponse.toResponse(usuarioRepository.findAll(pageRequest).getContent()),
-        pageRequest,
-        usuarioRepository.count());
-  }
+    @Override
+    public Page<UsuarioResponse> getAll(String nome, int page, int size) {
 
-  @Override
-  public Usuario getById(Integer id) {
-    return usuarioRepository.findById(id).orElseThrow();
-  }
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, "nome");
 
-  @Override
-  public UsuarioResponse update(UsuarioRequest usuarioRequest, Integer id) {
-    Usuario usuario = usuarioRepository.findById(id).orElseThrow();
+        if (nome != null) {
+            return new PageImpl<>(
+                UsuarioResponse.toResponse(usuarioRepository.findByNome(nome, pageRequest).getContent()),
+                pageRequest,
+                usuarioRepository.count());
+        }
 
-    usuario.setNome(usuarioRequest.getNome());
-    usuario.setCpf(usuarioRequest.getCpf());
-    usuario.setSenha(usuarioRequest.getSenha());
-    usuarioRepository.save(usuario);
+        return new PageImpl<>(
+            UsuarioResponse.toResponse(usuarioRepository.findAll(pageRequest).getContent()),
+            pageRequest,
+            usuarioRepository.count());
+    }
 
-    return new UsuarioResponse(usuario);
-  }
+    @Override
+    public Usuario getById(Integer id) {
+        return usuarioRepository.findById(id).orElseThrow();
+    }
 
-  @Override
-  public void delete(Integer id) { usuarioRepository.deleteById(id); }
+    @Override
+    public UsuarioResponse update(UsuarioRequest usuarioRequest, Integer id) {
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow();
+
+        usuario.setNome(usuarioRequest.getNome());
+        usuario.setCpf(usuarioRequest.getCpf());
+        usuario.setSenha(usuarioRequest.getSenha());
+        usuarioRepository.save(usuario);
+
+        return new UsuarioResponse(usuario);
+    }
+
+    @Override
+    public void delete(Integer id) { usuarioRepository.deleteById(id); }
 }
